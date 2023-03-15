@@ -1,0 +1,257 @@
+ <!----------------------interpolation---------------->
+<!-- <h1>Hello Angular {{title=="blog"}} {{data}}</h1>
+<h2>{{getvalue()}}</h2>
+<p>{{2*2}}</p>
+<app-login></app-login>
+<app-login></app-login>
+<app-sign-in></app-sign-in>
+
+----------Function Call---------
+<button (click)="getName('kishan')">click me</button>
+<button (click)="getData('hello')">call function</button>
+
+
+----------------event-----------
+<input type="text" #box (keyup)="getData(box.value)" placeholder="event keyup">
+<input type="text" #box1 (keydown)="getData(box1.value)" placeholder="event
+  keydown">
+<input type="text" #box2 (blur)="getData(box2.value)" placeholder="event blur">
+<h1 (mouseover)="getData('over')">hello Angular</h1>
+<br>
+<br>
+<input type="text" #box3 placeholder="Enter Name" name="name">
+<button (click)="getValue(box3.value)">click</button>
+<p>Box value is: {{displayVal}} </p>
+
+
+       <---------------count------------->
+<!-- <button (click)="counter('add')">++</button><br>
+<p>count : {{count}}</p>
+<button (click)="counter('minus')">--</button>
+<br>
+<br> -->
+
+<!-- <--------------if else------------->
+<!-- <h1>if else</h1>
+ <p *ngIf="show else elseBlock">
+  if condition
+</p>
+<ng-template #elseBlock>
+  <h1>Else Condition</h1>
+</ng-template> 
+    <p *ngIf="show; then ifBlock else elseBlock "></p>
+<ng-template #ifBlock>
+  <h1>IF Condition</h1>
+</ng-template>
+<ng-template #elseBlock>
+  <h1>Else Condition</h1>
+</ng-template> -->
+
+
+<!-- <----------------------swich case-------------->
+<!-- <h1>swich case</h1>
+<div [ngSwitch]="color">
+  <h1 *ngSwitchCase="'red'" style="color:red">Red Color</h1>
+  <h1 *ngSwitchCase="'green'" style="color:green">Green Color</h1>
+  <h1 *ngSwitchCase="'blue'" style="color:blue">Blue Color</h1>
+  <h1 *ngSwitchCase="'orange'" style="color:blue">orange Color</h1>
+  <h1 *ngSwitchCase="'skyblue'" style="color:skyblue">skyBlue Color</h1>
+  <h1 *ngSwitchDefault>unknown Color</h1>
+
+
+     <---------------for loop-------------- -->
+<!-- <h1>For Loop</h1>
+  <h3 *ngFor="let item of users">{{item}}</h3>
+  <h3 *ngFor="let item of uesrdetails">{{item.name}}--{{item.email}}--{{item.phone}}</h3> -->
+<!-- <---------------Nested loop-------------- -->
+<!-- <h1>Nested loop</h1>
+  <ul *ngFor="let user of user">
+    <li>Name: {{user.name}}</li>
+    <li>Phone: {{user.phone}}</li>
+    <li>Social Accounts</li>
+      <ul *ngFor="let account of user.socialAccount">
+      <li>{{account}}</li>
+      </ul>
+  </ul>
+
+     <---------------Style Binding/dynamic style-------------- -->
+<!-- <h1>Style Binding/dynamic style</h1>
+  <h2 [style.color]="color" [style.backgroundColor]="bgColor">{{title}}</h2>
+  <button (click)="updateColor()">update color</button> 
+
+</div>  -->
+<!-- <-----------------Form------------->
+<!-- <app-header></app-header> 
+<form #basicForm="ngForm" (ngSubmit)="getData(basicForm.value)">
+  <input type="text" ngModel name="user" placeholder="Enter user name"><br><br>
+  <input type="text" ngModel name="Email" placeholder="Enter user Email"><br><br>
+  <input type="text" ngModel name="Password" placeholder="Enter user Password"><br><br>
+  <button>Register</button>
+</form> -->
+
+
+<!-- <ul>
+  <li>{{userData.user}}</li>
+  <li>{{userData.Email}}</li>
+  <li>{{userData.Password}}</li>
+</ul>
+
+
+
+
+<------------------------Toggle Element / hide & showt----------------------->
+<!-- <h1> </h1>
+<button (click)="toggle()">Toggle</button>
+<h2 *ngIf="display">Heading Tag</h2>  -->
+
+<!-- <------------------------send data child to parent component----------------------->
+<!-- <app-child [item]="dataa"></app-child>
+<button (click)="updateChild()">Update child component</button>
+<br> -->
+
+<!-- <----------------------send data child to parent component----------------------->
+<!-- <h1>send data parent to child component</h1>
+<h2>{{udata}}</h2>
+<app-child (updateDataEvent)="updateData($event)"></app-child> -->
+
+<!-- <------------------Bootstrap------------------------>
+<!-- <p>
+	<ngb-alert [dismissible]="false">
+		<strong>Warning!</strong> Better check yourself, you're not looking too good.
+	</ngb-alert>
+</p> -->
+
+<!-- 
+<ngb-carousel *ngIf="images">
+	<ng-template ngbSlide>
+		<div class="picsum-img-wrapper">
+			<img [src]="images[0]" alt="Random first slide" />
+		</div>
+		<div class="carousel-caption">
+			<h3>First slide label</h3>
+			<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+		</div>
+	</ng-template>
+	<ng-template ngbSlide>
+		<div class="picsum-img-wrapper">
+			<img [src]="images[1]" alt="Random second slide" />
+		</div>
+		<div class="carousel-caption">
+			<h3>Second slide label</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+		</div>
+	</ng-template>
+	<ng-template ngbSlide>
+		<div class="picsum-img-wrapper">
+			<img [src]="images[2]" alt="Random third slide" />
+		</div>
+		<div class="carousel-caption">
+			<h3>Third slide label</h3>
+			<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+		</div>
+	</ng-template>
+</ngb-carousel> -->
+
+<!-- <-------------------Material UI---------------->
+<!-- <div class="example-label">Raised</div>
+<div class="example-button-row">
+  <button mat-raised-button>Basic</button>
+  <button mat-raised-button color="primary">Primary</button>
+  <button mat-raised-button color="accent">Accent</button>
+  <button mat-raised-button color="warn">Warn</button>
+  <button mat-raised-button disabled>Disabled</button>
+  <a mat-raised-button href="https://www.google.com/" target="_blank">Link</a>
+</div> -->
+
+<!-- <------------------two way binding------------------------>
+<!-- <h1>Two way binding</h1>
+  <input type="text" [(ngModel)]="name">
+  <h3>{{name}}</h3> -->
+<!-- <------------------Template Reference Variable------------------------>
+<!-- <input type="text" #box name="user" placeholder="Enter a name">
+    <button (click)="getVal(box.value)">call function</button> -->
+
+<!-- <------------------pipes------------------------>
+<!-- <h1>{{title | uppercase}}</h1>
+<h1>{{title | lowercase}}</h1> -->
+
+<!-- <------------------Template-driven-form------------------------>
+<!-- <h1>foms</h1>
+<form #loginForm="ngForm" (ngSubmit)=userLogin(loginForm.value)>
+  <input type="text" placeholder="enter a name" name="name" ngModel>
+  <br><br>
+
+  <input type="password"  placeholder="enter a password" name="password" ngModel>
+  <br><br>
+  <button>Login</button>
+</form> -->
+
+<!-- <------------------Reactive form & validation------------------------>
+<!-- <h1>Reactive Form</h1>
+<form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+  <input type="text" placeholder="Enter a email" name="user" formControlName="user">
+<br>
+<span style="color: red;" *ngIf="user && user.invalid && user.touched">This field is not valid</span><br>
+<input type="password" placeholder="Enter a password" name="password" formControlName="password">
+<br>
+<span style="color: red;" *ngIf="password && password.invalid && password.touched">This field is not valid</span>
+<br>
+<button [disabled]="loginForm.invalid">Login</button>
+</form> -->
+
+
+<!-- <------------------Directives------------------------>
+<!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos laudantium
+  culpa, illum distinctio eius eligendi esse modi, omnis dolorum sunt debitis
+  harum dolor molestias dolorem ea blanditiis atque ipsum quia.</p>
+<h1 appRedEl>Directives</h1> -->
+
+<!-- <------------------Routing------------------------>
+<!-- <h1>Routing</h1>
+<a routerLink="header">header</a><br>
+<a routerLink="child">child</a><br>
+<a routerLink="about">about</a><br> -->                                                  
+
+<!-- <router-outlet></router-outlet> -->
+
+<!-- <------------------Dynamic Routing------------------------>
+<!-- <h1>Dynamic Routing</h1>
+  <a routerLink="child/20">raj</a><br>
+  <a routerLink="child/30">kevin</a><br> -->
+<!-- <------------------Child Routing------------------------>
+<!-- <router-outlet></router-outlet> -->
+
+<!-- <------------------call Api------------------------>
+<!-- <h1>API CAll</h1>
+<ol>
+  <li *ngFor="let user of users">
+    {{user.name}}--{{user.id}}
+  </li>
+</ol> -->
+
+<!-- <-----------------POST Api------------------------>
+  <!-- <h1>Post API</h1>
+  <form #usersForm="ngForm" (ngSubmit)= "getUserFormData(usersForm.value)">
+    <input type="text" ngModel name="name" placeholder="Enter a Name" >
+    <br><br>
+    <input type="text"  ngModel name="data" placeholder="Enter a data" >
+    <br><br>
+
+    <button>Add New User</button>
+  </form> -->
+
+  <!-- <------------------Model------------------------> 
+  <!-- <h1>{{getData}}</h1> -->
+
+    <!-- <------------------lazy Loading------------------------> 
+      <h1>Lazy Loading In Angular</h1>
+        <ul>
+          <li>
+            <a routerLink="admin/login">Login</a>
+          </li>
+          <li>
+            <a routerLink="admin/list">List</a>
+          </li>
+        </ul>
+        <router-outlet></router-outlet> 
+      

@@ -1,0 +1,25 @@
+<nav>
+    <img src="assets/logo.svg.png" alt="logo" >
+
+
+<ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Login</a></li>
+    <li><a href="#">User</a></li>
+</ul>
+</nav>
+
+
+<form #basicForm="ngForm" (ngSubmit)="getData(basicForm.value)">
+  <input type="text" ngModel name="user" placeholder="Enter user name"><br><br>
+  <input type="text" ngModel name="Email" placeholder="Enter user Email"><br><br>
+  <input type="text" ngModel name="Password" placeholder="Enter user Password"><br><br>
+  <button>Register</button>
+</form>
+
+<ul>
+  <li>{{userData.user}}</li>
+  <li>{{userData.Email}}</li>
+  <li>{{userData.Password}}</li>
+</ul>

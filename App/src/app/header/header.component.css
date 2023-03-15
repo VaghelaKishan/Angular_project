@@ -1,0 +1,29 @@
+nav img{
+    width: 70px;
+
+}
+nav{
+    background-color: skyblue;
+    padding: 10px;
+}
+ul{
+    float: right;
+    list-style-type: none;
+    font-size: 31px;
+    padding: 0px 96px;
+    margin: 0px 2px;
+   
+}
+ul li{
+    display: inline-block;
+    padding: 10px; 
+}
+li a{
+    color: rgb(238, 132, 11);
+    text-decoration: none;
+    cursor: pointer;
+}
+li a:hover{
+    background-color: brown;
+    color: aqua;
+}

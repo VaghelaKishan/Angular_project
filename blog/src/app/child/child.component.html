@@ -1,0 +1,10 @@
+<h1>send data child to parent component</h1>
+<p>{{item}}</p>
+<br>
+<br>
+<br>  
+ 
+ <input type="text" #box>
+<button (click)="updateDataEvent.emit(box.value)">Update Value</button>
+<br><br>
+<h1>user id is: {{childId}}</h1>

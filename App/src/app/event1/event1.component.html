@@ -1,0 +1,10 @@
+<input type="text" #box (keyup)="getData(box.value)" placeholder="event keyup">
+<input type="text" #box1 (keydown)="getData(box1.value)" placeholder="event
+  keydown">
+<input type="text" #box2 (blur)="getData(box2.value)" placeholder="event blur">
+<h1 (mouseover)="getData('over')">hello Angular</h1>
+<br>
+<br>
+<input type="text" #box3 placeholder="Enter Name" name="name">
+<button (click)="getValue(box3.value)">click</button>
+<p>Box value is: {{displayVal}} </p>

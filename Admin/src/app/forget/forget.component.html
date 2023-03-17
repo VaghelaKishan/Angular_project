@@ -5,7 +5,10 @@
             Enter your email address and we'll send you an email with instructions to reset your password.
         </p>
         <div class="form-outline">
-            <input type="email" id="typeEmail" class="form-control my-3" />
+            <input type="email" id="typeEmail" class="form-control my-3" required />
+            <div class="invalid-feedback">
+                EmailAddress is required!
+              </div>
             <label class="form-label" for="typeEmail">Email input</label>
         </div>
         <a href="#!" class="btn btn-primary w-100" routerLink="/newpassword">Reset password</a>

@@ -4,13 +4,12 @@
         <p class="card-text py-2">
             Enter your email address and we'll send you an email with instructions to reset your password.
         </p>
+        <form  [formGroup]="forgetForm" (ngSubmit)="forgetUser()" class="needs-validation" novalidate>
         <div class="form-outline">
-            <input type="email" id="typeEmail" class="form-control my-3" required />
-            <div class="invalid-feedback">
-                EmailAddress is required!
-              </div>
-            <label class="form-label" for="typeEmail">Email input</label>
-        </div>
+            <input type="email" name="email" id="emailAddress" class="form-control form-control-lg" placeholder="Enter EmailAddress" formControlName="email" required />
+            <span style="color: red;" *ngIf="email && email.invalid && email.touched">Please enter an email</span>
+          </div>
+        </form>
         <a href="#!" class="btn btn-primary w-100" routerLink="/newpassword">Reset password</a>
         <div class="d-flex justify-content-between mt-4">
             <a class="" href="">Login</a>

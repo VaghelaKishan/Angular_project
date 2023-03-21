@@ -1,4 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-forget',
@@ -6,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./forget.component.css']
 })
 export class ForgetComponent implements OnInit {
+
   ngOnInit():void{
     (function () {
       'use strict'
@@ -27,4 +30,27 @@ export class ForgetComponent implements OnInit {
         })
     })()
   }
+    
+  
+  
+  forgetForm = new FormGroup({
+      email:new FormControl('',[Validators.required,Validators.email]),
+      password: new FormControl('',[Validators.required,Validators.minLength(6)]),
+      check: new FormControl('',[Validators.required]),
+    })
+  
+    forgetUser(){
+      console.warn(this.forgetForm.value);
+      }
+    get email(){
+      return this.forgetForm.get('email');
+    }
+    get password()
+    {
+      return this.forgetForm.get('password')
+    }
+    get check()
+    {
+      return this.forgetForm.get('check')
+    }
 }

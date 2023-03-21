@@ -6,7 +6,7 @@
             class="img-fluid" alt="Sample image">
         </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-          <form>
+          <form  [formGroup]="loginForm" (ngSubmit)="loginUser()" class="needs-validation" novalidate>
 
             <!-- Title -->
             <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
@@ -30,30 +30,41 @@
   
             <!-- Email input -->
             <div class="form-outline">
-              <input type="email" id="emailAddress" class="form-control form-control-lg" placeholder="Enter EmailAddress" required />
-              <div class="invalid-feedback">
-                EmailAddress is required!
-              </div>
               <label class="form-label" for="emailAddress">Email</label>
+              <input type="email" name="email" id="emailAddress" class="form-control form-control-lg" placeholder="Enter EmailAddress" formControlName="email" required />
+              <span style="color: red;" *ngIf="email && email.invalid && email.touched">Please enter an email</span>
+              <!-- <div class="invalid-feedback">
+                EmailAddress is required!
+              </div> -->
             </div>
+
+            
+            
   
             <!-- Password input -->
             <div class="form-outline mb-3">
-              <input type="password" id="password" class="form-control form-control-lg"
-                placeholder="Enter password" required/>
-                <div class="invalid-feedback">
-                  Password is required!
-                </div>
               <label class="form-label" for="password">Password</label>
+              <show-hide-password size="lg" [btnOutline]="false">
+              <input class="eyeicon" type="password" id="password" name="password" class="form-control form-control-lg"
+              placeholder="Enter password" formControlName="password" formControlName="password" required />
+            </show-hide-password>
+              
+              <span style="color: red;" *ngIf="password && password.invalid && password.touched">Please enter your password.<i class="bi bi-eye"></i></span>
+                <!-- <div class="invalid-feedback">
+                  Password is required!
+                </div> -->
+              
             </div>
+            
   
+            <!-- Checkbox -->
             <div class="d-flex justify-content-between align-items-center">
-              <!-- Checkbox -->
               <div class="form-check mb-0">
-                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" required />
+                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" required formControlName="check" />
                 <label class="form-check-label" for="form2Example3" >
                   Remember me
-                </label>
+                </label><br>
+                <span style="color: red;" *ngIf="check && check.invalid && check.touched" >Check !!! </span>
               </div>
               <a href="#!" class="text-body" routerLink="forget">Forgot password?</a>
             </div>
@@ -61,11 +72,11 @@
             <!-- submit -->
             <div class="text-center text-lg-start mt-4 pt-2">
               <!-- <button  type="button" class="btn btn-primary btn-lg"
-                style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button> -->
-                <!-- <div class="mt-4 pt-2">
-                  <input class="btn btn-primary btn-lg" type="submit" value="Login" />
-                </div> -->
-                <a href="https://www.droisys.com/" class="btn btn-primary btn-lg" target="_blank">Login</a>
+                style="padding-left: 2.5rem; padding-right: 2.5rem;" > Login</button>  -->
+                  <div class="mt-4 pt-2">
+                  <input class="btn btn-primary btn-lg" type="submit" value="Login" [disabled]="loginForm.invalid"  />
+                </div> 
+                <!-- <a href="#!"  class="btn btn-primary btn-lg">Login</a> -->
               <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a 
                   class="link-danger" routerLink="register">Register</a></p>
             </div>

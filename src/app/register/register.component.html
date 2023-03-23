@@ -1,0 +1,303 @@
+<section class="vh-100% gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-lg-9 col-xl-10" >
+          <div class="card shadow-2-strong card-registration shadow-lg p-3 mb-5 bg-white " style="border-radius: 30px;">
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-6 pb-4 pb-md-0 mb-md-8 mb-4" style="text-align: center;">Registration Form</h3>
+              <!-- Pofile Photo  -->
+              <div class="row">
+                <div class="form-outline ">
+                  <label for="profile">
+                    <img [src]="url"  class="rounded-circle" alt="error" width="100" height="100" id="img" name="img" >
+                  </label>
+                  <input type="file" style="position:relative;overflow:hidden" formControlName="profile" id="profile" class="form-control form-control-lg py-2" accept="image/png,image/jpg,image/jpeg" (change)="onselectFile($event)"  />
+                  <span style="color: red;" *ngIf="profile && profile.invalid && profile.touched">Choose an Image</span>
+                </div>
+              </div>
+
+              <form  [formGroup]="registerForm" (ngSubmit)="registerUser()" class="needs-validation" novalidate>
+                
+                
+                 <!-- user name -->
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+  
+                   
+                    <div class="form-outline">
+                      <input type="text" id="firstname"  class="form-control form-control-lg" formControlName="firstname" placeholder="Enter a First Name" />
+                      <span style="color: red;" *ngIf="firstname && firstname.invalid && firstname.touched">Please enter name</span>
+                      <!-- <div class="invalid-feedback" FirstName.touched>
+                        Firstname is required!
+                      </div> -->
+                      <!-- <label class="form-label" for="firstname">First Name</label> -->
+                      
+                    </div>
+                    <div class="form-outline col-md-30 mb-4" style="margin-top: 15px;">
+                      <input type="text" id="middleName" class="form-control form-control-lg" formControlName="middlename" placeholder="Enter a Middle Name" />
+                      <span style="color: red;" *ngIf="middlename && middlename.invalid && middlename.touched">Please enter name</span>
+                      <!-- <div class="invalid-feedback">
+                        Middle is required!
+                      </div> -->
+                      <!-- <label class="form-label" for="middleName">Middle Name</label> -->
+                    </div>
+
+  
+                  </div>
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                      <input type="text" id="lastName" class="form-control form-control-lg" formControlName="lastname" placeholder="Enter a Last Name" required/>
+                      <span style="color: red;" *ngIf="lastname && lastname.invalid && lastname.touched">Please enter a name</span>
+                      <!-- <div class="invalid-feedback">
+                        Last is required!
+                      </div> -->
+                      <!-- <label class="form-label" for="lastName">Last Name</label> -->
+                    </div>
+  
+                  </div>
+                </div>
+  
+
+                <!-- User Detail -->
+                 <div class="row">
+                  <!-- <div class="col-md-6 mb-4 d-flex align-items-center">
+  
+                    <div class="form-outline datepicker w-100">
+                      <input type="text" class="form-control form-control-lg" id="birthdayDate" />
+                      <label for="birthdayDate" class="form-label">Birthday</label>
+                    </div> 
+  
+                  </div> -->
+                  <div class="col-md-6 mb-4">
+  
+                    <h6 class="mb-2 pb-1">Gender: </h6>
+  
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
+                        value="option1" required  />
+                      <!-- <span style="color: red;" *ngIf="gender && gender.invalid && gender.touched">Please select a gender</span> -->
+
+                      <label class="form-check-label" for="femaleGender">Female</label>
+                    </div>
+  
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
+                        value="option2" required />
+                      <label class="form-check-label" for="maleGender">Male</label>
+                    </div>
+  
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
+                        value="option3" required />
+                      <label class="form-check-label" for="otherGender">Other</label>
+                    </div>
+                    
+  
+                  </div>
+                </div>
+
+                <!-- Dob -->
+                <div class="row">
+                  <div class="col-md-6 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                      <label class="form-label" style="width: 95px;" for="birthdate">Date Of Birth</label>
+                      <input  type="date" id="dob" class=" form-control form-control "  [(ngModel)]="year.name" formControlName="date" placeholder="Select a Birthdate" />
+                      <span style="color: red;" *ngIf="date && date.invalid && date.touched">Date is required.</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                      <label class="form-label" for="age">Age</label>
+                      <input type="text" id="age" class="form-control form-control " value="{{age.name}} Years" input type="button" value="get age"  (click)="onSubmit()" class="form-control col-md-6 "  readonly />
+                    </div>
+  
+                  </div>
+                </div>
+          
+
+
+                <!-- Email/Password input -->
+                <div class="row">
+                  <div class="col-md-6">
+  
+                    <div class="form-outline" style="margin-bottom: 30px;">
+                      <input type="email" id="emailAddress" class="form-control form-control-lg" formControlName="email" placeholder="Enter a Email Address" required />
+                      <span style="color: red;" *ngIf="user && user.invalid && user.touched">Please enter a valid email address</span>
+                      <!-- <div class="invalid-feedback">
+                        EmailAddress is required!
+                      </div> -->
+                      <!-- <label class="form-label" for="emailAddress">Email</label> -->
+                    </div>
+                  </div>
+                    <div class="col-md-6">
+                      <div class="form-outline ">
+                        <show-hide-password size="lg" [btnOutline]="false">
+                        <input type="password" id="password" class="form-control form-control-lg"   formControlName="password" placeholder="Enter a valid Password" required />
+                      </show-hide-password>
+                        <span style="color: red;" *ngIf="password && password.invalid && password.touched">password field that must contain 6 or more characters that are of at least one number, and one uppercase and lowercase letter</span>
+                        <!-- <div class="invalid-feedback">
+                          Password is required!
+                        </div> -->
+                        <!-- <label class="form-label" for="password">Password</label> -->
+                      </div>
+                    </div>
+
+                    <div class="form-outline" style="margin-bottom: 30px;">
+                      <input type="number" [(ngModel)]="cc"  id="phone" namr="phone" class="form-control form-control-lg " required ng2TelInput style="width: 13em;" formControlName="phone" placeholder="Enter a Phone No"/> <br>
+                      <span style="color: red;" *ngIf="phone && phone.invalid && phone.touched">  Please enter a valid PhoneNo</span>
+                      <br>
+                      <span>{{cc}}</span>
+                      <link href="/path/to/material-icons/iconfont/material-icons.css" rel="stylesheet">
+                    </div>
+                  </div>
+                
+              
+
+                <!-- Address -->
+                <div class="row">
+                  <div class="col-md-6 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                      <input type="text" id="address" class="form-control form-control-lg" formControlName="address" placeholder="Enter a Address- House-no,Street" required />
+                      <span style="color: red;" *ngIf="address && address.invalid && address.touched">Please Enter a valid Address</span>
+
+                      <div class="invalid-feedback">
+                        Address is required!
+                      </div>
+                      <!-- <label class="form-label" for="address" >Address</label> -->
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4 pb-2">
+                    <div class="form-outline">
+                      <input type="text" id="address" class="form-control form-control-lg" formControlName="address" placeholder="Landmark,Area-pincode" required />
+                      <span style="color: red;" *ngIf="address && address.invalid && address.touched">Please Enter a valid Address</span>
+
+                      <div class="invalid-feedback">
+                        Address is required!
+                      </div>
+                      <!-- <label class="form-label" for="address" >Address</label> -->
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- select Country -->
+                <form >
+                <div class="row" >
+                
+                  <div class="col-md-4 mb-2 pb-2">
+                    <fieldset>
+                    <select class="select form-control-lg px-mb-5" style="width: 80%;" #country name="country" id="country" (change)="onCountryChange($event)">
+                      <option [value]="null">-- Select Country --</option>
+                      <option *ngFor="let country of countries" [value]="country | json">
+                        {{ country.flag }}&nbsp;&nbsp;{{ country.name }} 
+                      </option>
+                    </select>
+                  </fieldset>
+                    </div>
+
+                    <div class="col-md-4 mb-2 pb-2">
+                      <fieldset>
+                    <select class="select form-control-lg px-xl-5" style="width: 90%;" *ngIf="states" #state name="state" id="state"  (change)="onStateChange($event)">
+                      <option value="0" disabled>Choose City</option>
+                      <option [value]="null">-- Select State --</option>
+                        <option *ngFor="let state of states" [value]="state | json">
+                          {{ state.name }}
+                        </option>
+                      </select>
+                    </fieldset>
+                    </div>
+
+                
+                   <div class="col-md-4 mb-4 pb-2" >
+                    <fieldset>
+                  <select class="select form-control-lg px-xl-5" style="width: 90%;" *ngIf="cities" #city  name="city" id="city" (change)="onCityChange($event)">
+                    <option [value]="null">-- Select City --</option>
+                        <option *ngFor="let city of cities" [value]="city | json">
+                          {{ city.name }}
+                        </option>
+                    </select>
+                  </fieldset>
+              </div>
+            </div>
+          </form>
+
+                <!-- Hobbies -->
+                <div class="col-md-12 mb-4">
+                  <h4 class="mb-6 pb-2">Hobbies: </h4>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="cricket" id="cricket"
+                      value="option1"  />
+                    <label class="form-check-label" for="cricket">Cricket</label>
+                  </div>
+                    <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="chess" id="chess"
+                      value="option2"  />
+                    <label class="form-check-label" for="cricket">Chess</label>
+                  </div>
+                    <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="videogame" id="videogame"
+                      value="option3"  />
+                    <label class="form-check-label" for="cricket">Video Game</label>
+                  </div>
+                    <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="dance" id="dance"
+                      value="option4"  />
+                    <label class="form-check-label" for="cricket">Dance</label>
+                  </div>
+                    <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="writing" id="writing"
+                      value="option5"  />
+                    <label class="form-check-label" for="cricket">Writing</label>
+                  </div>
+                    <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="photography" id="photography"
+                      value="option6"  />
+                    <label class="form-check-label" for="cricket">Photography</label>
+                  </div>
+                    <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="drawing" id="drawing"
+                      value="option6"  />
+                    <label class="form-check-label" for="cricket">Drawing</label>
+                  </div>
+                    <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="webdesign" id="webdesign"
+                      value="option6"  />
+                    <label class="form-check-label" for="cricket">Web design</label>
+                  </div>
+                  </div>
+                 
+
+                <!-- Qualification -->
+                  <div class="row">
+                      <div class="form-outline">
+                        <input type="text" id="desc" class="form-control form-control-lg " required placeholder="Qualification" formControlName="Qualification" />
+                        <span style="color: red;" *ngIf="Qualification && Qualification.invalid && Qualification.touched">Enter a Qualification </span>
+                      </div>
+                    </div>
+
+                <!-- Submit -->
+                <div class="mt-4 pt-2">
+                  <input [disabled]="!registerForm.invalid" (click)="onchange()" class="btn btn-primary btn-lg" type="submit" value="Submit"/>
+                </div>
+
+                <div class="text-center text-lg-start mt-4 pt-2">
+                  <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a 
+                      class="link-danger" routerLink="">Login</a></p>
+                </div>
+              </form>
+      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+    <div class="text-white mb-3 mb-md-0">
+      © Droisys India Pvt.Ltd 2023. All rights reserved.
+    </div>
+    </div>
+  </section>

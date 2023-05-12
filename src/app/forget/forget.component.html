@@ -6,12 +6,21 @@
         </p>
         <form  [formGroup]="forgetForm" (ngSubmit)="forgetUser()" class="needs-validation" novalidate>
         <div class="form-outline">
-            <input type="email" name="email" id="emailAddress" class="form-control form-control-lg" placeholder="Enter EmailAddress" formControlName="email" required />
-            <span style="color: red;" *ngIf="email && email.invalid && email.touched">Please enter an email</span>
-          </div>
+            <input type="email"  [(ngModel)]="resetPasswordEmail" (ngModelChange)="checkValidEmail($event)" name="email" id="emailAddress" class="form-control form-control-lg" placeholder="Enter EmailAddress" formControlName="email" required />
+            <!-- <span style="color: red;" *ngIf="email && email.invalid && email.touched">Please enter an email</span> -->
+            <small *ngIf="!resetPasswordEmail" class="text-danger">*Email is Required*</small>
+            <small *ngIf="!isValidEmail && resetPasswordEmail" class="text-danger">*Email is invalid*</small>
+        </div>
         </form>
-        <a href="#!" class="btn btn-primary w-100" routerLink="/newpassword">Reset password</a>
+
+
+<br>
+       <input (click)="confirmToSend()"  class="btn btn-primary btn-lg" type="submit" value="Send"/>
         <div class="d-flex justify-content-between mt-4">
+
+
+
+
             <a class="" href="">Login</a>
             <a class="" href="register">Register</a>
         </div>

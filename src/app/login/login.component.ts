@@ -1,6 +1,12 @@
 import { Component, OnInit ,ContentChild } from '@angular/core';
 import { FormControl, FormGroup, Validators,FormBuilder } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { NgToastService } from 'ng-angular-popup';
+import { UserStoreService } from '../services/user-store.service';
+import { ResetPasswordService } from '../services/reset-password.service';
 
 
 @Component({
@@ -30,19 +36,28 @@ export class LoginComponent implements OnInit  {
           form.classList.add('was-validated')
         }, false)
       })
-  })()
+  })
+
+  this.userStore.getRoleFromStore()
+    .subscribe(val=>{
+      const tokenPayload = this.auth.decodeToken();
+      this.Role = tokenPayload.role;
+      
+    })
 }
-  
+
 
 
  loginForm = new FormGroup({
     email:new FormControl('',[Validators.required,Validators.email]),
     password: new FormControl('',[Validators.required,Validators.pattern('(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}')]),
     check: new FormControl('',[Validators.required]),
+    
+
   })
 
   loginUser(){
-    console.warn(this.loginForm.value);
+    // console.warn(this.loginForm.value);
     }
   get email(){
     return this.loginForm.get('email');
@@ -57,5 +72,56 @@ export class LoginComponent implements OnInit  {
   }
 
 
- 
+  constructor(private route:Router,private auth:AuthService,
+    private router:Router,private toast:NgToastService,
+    private userStore:UserStoreService,private resetService:ResetPasswordService,private obj:ActivatedRoute 
+    ){}
+    Role:any;
+  onchange(){
+    // console.warn(this.registerForm.value);
+    // console.warn(this.form.value);
+  
+    if (this.loginForm.valid) {
+      // this.route.navigate(['grid']);
+      // console.warn(this.loginForm.value);
+      
+      // send the obj to database
+      this.auth.login(this.loginForm.value)
+      .subscribe({
+        next:(res)=>{
+          
+          // this.loginForm.reset();
+          // this.auth.storeToken(res.token);
+           this.auth.storeToken(res.accessToken);
+           this.auth.storeRefreshToken(res.refreshToken);
+          const tokenPayload = this.auth.decodeToken();
+          this.userStore.setFullNameForStore(tokenPayload.name);
+          this.userStore.setRoleForStore(tokenPayload.role)
+        
+          if(this.Role === 'Admin'){
+
+          
+          this.router.navigate(['grid'])}
+          else{
+            const userEmail = this.loginForm.get('email')?.value;
+          this.route.navigate(['userprofile', userEmail]);
+          }
+          this.toast.success({detail:"SUCCESS",summary:"Login Success",duration:5000});
+        },
+        error:(err)=>{
+          // console.log(err);
+          console.log(err.Response);
+          this.toast.error({detail:"ERROR",summary:err.message,duration:5000});
+
+        }
+      })
+    }
+
+    else {
+      this.toast.warning({detail:"WARN",summary:"PLEASE FILL ALL VALID DETAILS!",duration:5000});
+    }
+  }
+
+
+  
 }

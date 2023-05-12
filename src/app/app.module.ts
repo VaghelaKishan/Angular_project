@@ -14,8 +14,33 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipePipe } from './pipe.pipe';
 import { Ng2TelInputModule } from 'ng2-tel-input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GridComponent } from './grid/grid.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+import {MatIconModule} from '@angular/material/icon';
 
 
+
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { Grid2Component } from './grid2/grid2.component';
+import { Register2Component } from './register2/register2.component';
+import { NgToastModule } from 'ng-angular-popup'
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { Grid3Component } from './grid3/grid3.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -25,8 +50,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ForgetComponent,
     NewpasswordComponent,
     PipePipe,
-    
- 
+    GridComponent,
+    Grid2Component,
+    Register2Component,
+    Grid3Component,
+    UserprofileComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,10 +66,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ShowHidePasswordModule,
     Ng2TelInputModule,
     BrowserAnimationsModule,
-    
+    HttpClientModule,MatIconModule,MatToolbarModule,MatButtonModule,MatDialogModule,MatFormFieldModule,
+    MatInputModule,MatDatepickerModule,MatNativeDateModule,MatRadioModule,MatSelectModule,MatTableModule,
+    MatPaginatorModule,MatSortModule,MatSnackBarModule,
+    NgToastModule,NgxPaginationModule
 
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass : TokenInterceptor,
+    multi : true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

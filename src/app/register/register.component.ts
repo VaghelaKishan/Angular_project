@@ -2,7 +2,7 @@ import { Component ,OnInit } from '@angular/core';
 import { PipePipe } from '../pipe.pipe';
 import { ElementRef, VERSION, ViewChild } from '@angular/core';
 import { Country, State, City }  from 'country-state-city';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 console.log(Country.getAllCountries())
 console.log(State.getAllStates())
@@ -46,12 +46,14 @@ registerForm = new FormGroup({
   date: new FormControl('',[Validators.required]),
   middlename: new FormControl('',[Validators.required]),
   lastname: new FormControl('',[Validators.required]),
-  gender: new FormControl('',[Validators.required]),
+  gender1: new FormControl('',[Validators.required]),
   phone: new FormControl('',[Validators.required,Validators.minLength(4),Validators.maxLength(10)]),
   address: new FormControl('',[Validators.required,Validators.maxLength(350)]),
   contry: new FormControl('',[Validators.required]),
   profile: new FormControl('',[Validators.required]),
+  hobbie: new FormControl('',[Validators.required]),
   Qualification: new FormControl('',[Validators.required]),
+ 
 
 
 })
@@ -80,9 +82,9 @@ get password()
 {
   return this.registerForm.get('password')
 }
-get gender()
+get gender1()
 {
-  return this.registerForm.get('gender')
+  return this.registerForm.get('gender1')
 }
 get date()
 {
@@ -104,6 +106,10 @@ get profile()
 {
   return this.registerForm.get('profile')
 }
+get hobbie()
+{
+  return this.registerForm.get('hobbie')
+}
 get Qualification()
 {
   return this.registerForm.get('Qualification')
@@ -111,14 +117,19 @@ get Qualification()
 
 
 
+
 //Age
 ngOnInit(): void {
-  
+ 
 }
 
 public year:any ={};
 public age:any ={};
-constructor() {}
+constructor(private fb: FormBuilder) {
+  this.form = this.fb.group({
+    checkArray: this.fb.array([], [Validators.required]),
+  });
+}
 
  public onSubmit():void{
     this.age.name = new PipePipe().transform(this.year.name);
@@ -175,8 +186,9 @@ clear(type: string): void {
 }
 
 //profile
-url="./assets/Profile-Male-PNG.png"
+url="../../assets/Profile-Male-PNG.png"
 onselectFile(e:any){
+  
   if(e.target.files){
     var reader=new FileReader();
     reader.readAsDataURL(e.target.files[0]);
@@ -186,8 +198,73 @@ onselectFile(e:any){
   }
 }
 
+
+
 onchange(){
   console.warn(this.registerForm.value);
-}
+  console.warn(this.form.value);
+  // console.warn(this.selectedGender);
+  // if (this.registerForm.invalid) {
+  //   this.registerForm.get('firstname').markAsTouched();
+  //   this.registerForm.get('lastname').markAsTouched();
+  //   return;
+  // }
 
 }
+
+
+//chechbox------------------
+
+// constructor(private fb: FormBuilder) {
+//   this.form = this.fb.group({
+//     checkArray: this.fb.array([], [Validators.required]),
+//   });
+
+  form: FormGroup;
+  Data: Array<any> = [
+    { name: 'Cricket', value: 'Cricket' },
+    { name: 'Vollyball', value: 'Vollyball' },
+    { name: 'Chess', value: 'Chess' },
+    { name: 'Drawing', value: 'Drawing' },
+    { name: 'Photography', value: 'Photography' },
+    { name: 'Writting', value: 'Writting' },
+    { name: 'Dance', value: 'Dance' },
+    { name: 'Video Game', value: 'Video Game' },
+    { name: 'Web design', value: 'Web design' },
+    
+  ];
+
+  onCheckboxChange(e: any) {
+    const checkArray: FormArray = this.form.get('checkArray') as FormArray;
+    if (e.target.checked) {
+      checkArray.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray.controls.forEach((item: any) => {
+        if (item.value == e.target.value) {
+          checkArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+}
+
+// gender--------
+
+selectedGender: string='';
+Genders:any=[
+  'male',
+  'female',
+  'other'
+];
+radiochange(event:any){
+  this.selectedGender=event.target.value;
+}
+
+
+}
+
+
+
+

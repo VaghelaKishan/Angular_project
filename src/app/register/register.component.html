@@ -5,20 +5,16 @@
           <div class="card shadow-2-strong card-registration shadow-lg p-3 mb-5 bg-white " style="border-radius: 30px;">
             <div class="card-body p-4 p-md-5">
               <h3 class="mb-6 pb-4 pb-md-0 mb-md-8 mb-4" style="text-align: center;">Registration Form</h3>
-              <!-- Pofile Photo  -->
-              <div class="row">
-                <div class="form-outline ">
-                  <label for="profile">
-                    <img [src]="url"  class="rounded-circle" alt="error" width="100" height="100" id="img" name="img" >
-                  </label>
-                  <input type="file" style="position:relative;overflow:hidden" formControlName="profile" id="profile" class="form-control form-control-lg py-2" accept="image/png,image/jpg,image/jpeg" (change)="onselectFile($event)"  />
-                  <span style="color: red;" *ngIf="profile && profile.invalid && profile.touched">Choose an Image</span>
-                </div>
-              </div>
+                <!-- Pofile Photo  -->
+                <div style="text-align: center;">
+                  <label for="img"><img [src]="url" class="rounded-circle" height="100" width="100" id="img1" style="cursor: pointer;"></label>          
+                  <input class="form-control" type="file" style="display: none; visibility:none" (change)="onselectFile($event)" id="img" formControlName="profile" accept="image/xpng,image/jpeg,image/jpg" placeholder="Enter Your Profile Image"/>
+                  <span style="color: red;" class="error" *ngIf="(profile && profile.invalid) && (profile.touched || firstname && firstname.touched && firstname.invalid )"><br>User Profile Picture is required!<br></span>
+                  <br>
+                  </div>
 
               <form  [formGroup]="registerForm" (ngSubmit)="registerUser()" class="needs-validation" novalidate>
-                
-                
+                <br>
                  <!-- user name -->
                 <div class="row">
                   <div class="col-md-6 mb-4">
@@ -60,60 +56,33 @@
   
 
                 <!-- User Detail -->
-                 <div class="row">
-                  <!-- <div class="col-md-6 mb-4 d-flex align-items-center">
-  
-                    <div class="form-outline datepicker w-100">
-                      <input type="text" class="form-control form-control-lg" id="birthdayDate" />
-                      <label for="birthdayDate" class="form-label">Birthday</label>
-                    </div> 
-  
-                  </div> -->
-                  <div class="col-md-6 mb-4">
-  
+                <div class="row">
                     <h6 class="mb-2 pb-1">Gender: </h6>
-  
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
-                        value="option1" required  />
-                      <!-- <span style="color: red;" *ngIf="gender && gender.invalid && gender.touched">Please select a gender</span> -->
-
-                      <label class="form-check-label" for="femaleGender">Female</label>
-                    </div>
-  
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
-                        value="option2" required />
-                      <label class="form-check-label" for="maleGender">Male</label>
-                    </div>
-  
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
-                        value="option3" required />
-                      <label class="form-check-label" for="otherGender">Other</label>
-                    </div>
-                    
-  
-                  </div>
+                    <div class="form-check form-check-inline" style="padding-bottom: 7px;" >
+                      <div *ngFor="let gender of Genders">
+                        <input type="radio" formControlName="gender1" class="form-check-input"  value="{{gender}}" (change)="radiochange($event)" required>
+                        <p class="checkbox-inline" >{{gender}}</p>
+                      </div>
+                      <span style="color: red;" *ngIf="(gender1 && gender1.invalid) && (gender1.touched || date && date.touched && date.invalid )">gender is required.</span>
+                 </div>
                 </div>
+                
 
                 <!-- Dob -->
                 <div class="row">
                   <div class="col-md-6 mb-4 pb-2">
   
-                    <div class="form-outline">
+                    <div class="form-outline" >
                       <label class="form-label" style="width: 95px;" for="birthdate">Date Of Birth</label>
-                      <input  type="date" id="dob" class=" form-control form-control "  [(ngModel)]="year.name" formControlName="date" placeholder="Select a Birthdate" />
+                      <input  type="date" id="dob" class=" form-control form-control-lg "  [(ngModel)]="year.name" formControlName="date" placeholder="Select a Birthdate" />
                       <span style="color: red;" *ngIf="date && date.invalid && date.touched">Date is required.</span>
                     </div>
                   </div>
                   <div class="col-md-6 mb-4 pb-2">
-  
                     <div class="form-outline">
                       <label class="form-label" for="age">Age</label>
-                      <input type="text" id="age" class="form-control form-control " value="{{age.name}} Years" input type="button" value="get age"  (click)="onSubmit()" class="form-control col-md-6 "  readonly />
+                      <input type="text" id="age" class="form-control form-control-lg " style="padding: 11px 10px;" value="{{age.name}} Years" input type="button" value="get age"  (click)="onSubmit()" class="form-control col-md-6 "  readonly />
                     </div>
-  
                   </div>
                 </div>
           
@@ -122,14 +91,9 @@
                 <!-- Email/Password input -->
                 <div class="row">
                   <div class="col-md-6">
-  
                     <div class="form-outline" style="margin-bottom: 30px;">
                       <input type="email" id="emailAddress" class="form-control form-control-lg" formControlName="email" placeholder="Enter a Email Address" required />
                       <span style="color: red;" *ngIf="user && user.invalid && user.touched">Please enter a valid email address</span>
-                      <!-- <div class="invalid-feedback">
-                        EmailAddress is required!
-                      </div> -->
-                      <!-- <label class="form-label" for="emailAddress">Email</label> -->
                     </div>
                   </div>
                     <div class="col-md-6">
@@ -138,10 +102,6 @@
                         <input type="password" id="password" class="form-control form-control-lg"   formControlName="password" placeholder="Enter a valid Password" required />
                       </show-hide-password>
                         <span style="color: red;" *ngIf="password && password.invalid && password.touched">password field that must contain 6 or more characters that are of at least one number, and one uppercase and lowercase letter</span>
-                        <!-- <div class="invalid-feedback">
-                          Password is required!
-                        </div> -->
-                        <!-- <label class="form-label" for="password">Password</label> -->
                       </div>
                     </div>
 
@@ -200,11 +160,11 @@
 
                     <div class="col-md-4 mb-2 pb-2">
                       <fieldset>
-                    <select class="select form-control-lg px-xl-5" style="width: 90%;" *ngIf="states" #state name="state" id="state"  (change)="onStateChange($event)">
+                    <select class="select form-control-lg px-xl-5" style="width: 90%;"  #state name="state" id="state"  (change)="onStateChange($event)">
                       <option value="0" disabled>Choose City</option>
                       <option [value]="null">-- Select State --</option>
                         <option *ngFor="let state of states" [value]="state | json">
-                          {{ state.name }}
+                          {{ state.flag }}&nbsp;&nbsp;{{ state.name }} 
                         </option>
                       </select>
                     </fieldset>
@@ -213,10 +173,11 @@
                 
                    <div class="col-md-4 mb-4 pb-2" >
                     <fieldset>
-                  <select class="select form-control-lg px-xl-5" style="width: 90%;" *ngIf="cities" #city  name="city" id="city" (change)="onCityChange($event)">
+                  <select class="select form-control-lg px-xl-5" style="width: 90%;"  #city  name="city" id="city" (change)="onCityChange($event)">
                     <option [value]="null">-- Select City --</option>
                         <option *ngFor="let city of cities" [value]="city | json">
-                          {{ city.name }}
+                          {{ city.flag }}&nbsp;&nbsp;{{ city.name }} 
+
                         </option>
                     </select>
                   </fieldset>
@@ -225,7 +186,7 @@
           </form>
 
                 <!-- Hobbies -->
-                <div class="col-md-12 mb-4">
+                <!-- <div class="col-md-12 mb-4">
                   <h4 class="mb-6 pb-2">Hobbies: </h4>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" name="cricket" id="cricket"
@@ -267,7 +228,24 @@
                       value="option6"  />
                     <label class="form-check-label" for="cricket">Web design</label>
                   </div>
-                  </div>
+                  </div> -->
+
+                  <div class="col-md-12 mb-4">
+                    <h4 class="mb-6 pb-2">Hobbies: </h4>
+                    
+                    <div class="form-check form-check-inline">
+                    <span style="color: red;" *ngIf="hobbie && hobbie.invalid && hobbie.touched">Please check a hobbies</span>
+                  <form [formGroup]="registerForm" (ngSubmit)="registerUser()" novalidate>
+                    <div *ngFor="let data of Data; let i=index">
+                   <label>
+                   <input formControlName="hobbie" type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" required />
+                    {{data.name}}
+                 </label>
+                    </div>
+                   </form></div></div>
+
+          
+
                  
 
                 <!-- Qualification -->
@@ -280,7 +258,7 @@
 
                 <!-- Submit -->
                 <div class="mt-4 pt-2">
-                  <input [disabled]="!registerForm.invalid" (click)="onchange()" class="btn btn-primary btn-lg" type="submit" value="Submit"/>
+                  <input (click)="onchange()" class="btn btn-primary btn-lg" type="submit" value="Submit"/>
                 </div>
 
                 <div class="text-center text-lg-start mt-4 pt-2">

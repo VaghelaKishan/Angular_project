@@ -15,28 +15,6 @@ import { NgToastModule, NgToastService } from 'ng-angular-popup';
 import {MatTableDataSource} from '@angular/material/table';
 
 
-export interface PeriodicElement {
- 
-  firstname: any;
-  lastname: any;
-  email: any;
-  age: any;
-  
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    email: new FormControl(''),
-    age: new FormControl(''),
-    
-  }
-];
-
-
-
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
@@ -177,13 +155,7 @@ data:any;
   items = Array.from({length: 100}).map((_, i) => `Item #${i}`);
   p: number =1;
 
-  displayedColumns: string[] = ['firstname', 'lastname', 'email', 'age'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 }
 
 

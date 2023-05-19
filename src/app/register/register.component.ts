@@ -20,7 +20,7 @@ import { ApiService } from '../services/api.service';
 export class RegisterComponent implements OnInit {
   cc: any;
   submitted: boolean | undefined;
-
+  imageUrl: string = '';
   ngOnInit(): void {
     (function () {
       'use strict';
@@ -47,7 +47,11 @@ export class RegisterComponent implements OnInit {
         );
       });
     })();
+    
+ 
   }
+ 
+
  
   checkArray: Array<string> = [];
 
@@ -227,11 +231,13 @@ export class RegisterComponent implements OnInit {
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
         this.url = event.target.result;
+        // this.registerForm.controls['profile'].setValue(this.url);
       };
       const formData = new FormData();
       let fileToUpload = e.target.files[0];
-     formData.append('file', fileToUpload, fileToUpload.name);
-    this.profilepic = formData;
+      formData.append('file', fileToUpload, fileToUpload.name);
+       this.profilepic = formData;
+
     }
   }
 
@@ -267,6 +273,8 @@ export class RegisterComponent implements OnInit {
       .subscribe({
         next:(res=>{
         console.log(res);
+        const image = this.auth.getImage();
+        this.profilepic = res || image;
         }),
         error:(err=>{
           console.log(err);
@@ -341,6 +349,10 @@ export class RegisterComponent implements OnInit {
   radiochange(event: any) {
     this.selectedGender = event.target.value;
   }
+
+
+
+ 
 }
 
 

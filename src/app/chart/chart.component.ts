@@ -1,37 +1,66 @@
 import { Component } from '@angular/core';
+import { DataService } from '../services/data.service';
+import { Chart,  registerables } from 'chart.js/auto';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent {
-  public chartType: string = 'bar';
+export class ChartComponent  {
+  public chart: Chart | any;
 
-  public chartDatasets: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
+  constructor(private http: HttpClient) { }
 
-  public chartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  ngOnInit() {
+    this.fetchDailyUserCountData();
+  }
 
-  public chartColors: Array<any> = [
-    {
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgba(255, 99, 132, 1)',
-      borderWidth: 2
-    },
-    {
-      backgroundColor: 'rgba(54, 162, 235, 0.2)',
-      borderColor: 'rgba(54, 162, 235, 1)',
-      borderWidth: 2
-    }
-  ];
+  fetchDailyUserCountData() {
+    this.http.get<number[]>('https://localhost:7249/api/User/user/RegisterUserCount').subscribe(data => {
+      const labels: any[] = [];
+      const counts: any[] = [];
+  
+      data.forEach((count, index) => {
+        const date = new Date();
+        date.setDate(date.getDate() - (6 - index));
+        const formattedDate = date.toISOString().split('T')[0];
+        const dayName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][date.getDay()];
+        const label = `${dayName} (${formattedDate})`;
+        labels.push(label);
+        counts.push(count);
+      });
+  
+      this.createChart(labels, counts);
+    });
+  }
 
-  public chartOptions: any = {
-    responsive: true
-  };
+  createChart(labels: any[], counts: any[]) {
+    const canvas: HTMLCanvasElement = document.getElementById('barChart') as HTMLCanvasElement;
+    const ctx: CanvasRenderingContext2D |any = canvas.getContext('2d');
 
-  public chartClicked(e: any): void { }
-  public chartHovered(e: any): void { }
+    this.chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Registered Users',
+            data: ['1', '2', '5', '7', '5', '8', '12'],
+            // data: counts,
+            backgroundColor: 'blue'
+          }
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
 }

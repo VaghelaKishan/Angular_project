@@ -63,6 +63,7 @@ export class UserprofileComponent implements OnInit{
     }
 
   editProfileForm = new FormGroup({
+    profile: new FormControl(''),
     firstname: new FormControl(''),
     lastname: new FormControl(''),
     email: new FormControl(''),
@@ -79,6 +80,7 @@ export class UserprofileComponent implements OnInit{
   openModal(
     targetModal: any,
     user: {
+      profile: any;
       firstname: any;
       lastname: any;
       email: any;
@@ -98,6 +100,7 @@ export class UserprofileComponent implements OnInit{
     });
 
     this.editProfileForm.patchValue({
+      profile: user.profile,
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,
@@ -112,6 +115,17 @@ export class UserprofileComponent implements OnInit{
     });
   }
   onSubmit() {
+    this.api.UploadImage(this.profilepic , this.editProfileForm.get('email')?.value)
+    .subscribe({
+      next:(res=>{
+      console.log(res);
+      const image = this.auth.getImage();
+        this.profilepic = res || image;
+      }),
+      error:(err=>{
+        console.log(err);
+      })
+    })
     this.modalService.dismissAll();
     console.log('res:', this.editProfileForm.getRawValue());
     // this.updateData();
@@ -143,5 +157,25 @@ email:any;
       this.data = data
       console.log(this.data)
     })
+    }
+
+
+    profilepic : any;
+    // //profile
+    url = './assets/Profile-Male-PNG.png';
+    onselectFile(e: any) {
+  
+  
+      if (e.target.files) { 
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = (event: any) => {
+          this.data.profile = event.target.result;
+        };
+        const formData = new FormData();
+        let fileToUpload = e.target.files[0];
+       formData.append('file', fileToUpload, fileToUpload.name);
+      this.profilepic = formData;
+      }
     }
 }

@@ -66,6 +66,10 @@ export class AuthService {
     if(this.userPayload)
     return this.userPayload.Role;
   }
+  getImage(){
+    if(this.userPayload)
+    return this.userPayload.image;
+  }
 
   renewToken(tokenApi:TokenApiModel){
     return this.http.post<any>(`${this.baseUrl}refresh`,tokenApi)

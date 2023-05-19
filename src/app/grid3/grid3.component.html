@@ -5,10 +5,10 @@
         <div class="col col-lg-9 col-xl-7" style="width: 100.33333333%;">
           <div class="card shadow-5-strong shadow-lg">
             <div class="rounded-top text-white d-flex flex-row" style="background-color: #040404; height:165px;">
-              <div class="ms-4 mt-5 d-flex flex-column" style="width: 100px;">
+              <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; height: 180px;">
                 <img src="{{data.profile}}"
-                  alt="Generic placeholder image" class="img-fluid img-thumbnail mt-5 mb-2 rounded-circle"
-                  style="width: 150px; z-index: 1">
+                  alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2 rounded-circle"
+                  style="width: 150px; height: 150px; z-index: 1">
                 
               </div>
               <div class="ms-3" style="margin-top: 100px;">
@@ -122,7 +122,7 @@
      <form [formGroup]="editProfileForm">
 
       <div >
-        <label for="img"><img [src]="data.profile" class="rounded-circle"
+        <label for="img"><img src="{{data.profile}}" class="rounded-circle"
             height="100" width="100" id="img1" style="cursor: pointer;"></label>
         <input class="form-control" type="file" style="display: none;
           visibility:none" (change)="onselectFile($event)" id="img"

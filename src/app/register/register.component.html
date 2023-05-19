@@ -16,7 +16,7 @@
                 <label for="img"><img [src]="url" class="rounded-circle"
                     height="100" width="100" id="img1" style="cursor: pointer;"></label>
                 <input class="form-control" type="file" style="display: none;
-                  visibility:none" (change)="onselectFile($event)" id="img"
+                  visibility:none" (change)="onselectFile($event)"  id="img"
                   formControlName="profile"
                   accept="image/xpng,image/jpeg,image/jpg"/>
                 <span style="color: red;" class="error" *ngIf="(profile &&

@@ -41,6 +41,12 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { Grid3Component } from './grid3/grid3.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {NgChartsModule} from 'ng2-charts';
+import { ChartComponent } from './chart/chart.component';
+import {MatListModule} from '@angular/material/list';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { SearchFilterPipe } from './search-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -49,12 +55,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
     RegisterComponent,
     ForgetComponent,
     NewpasswordComponent,
+    ChartComponent,
     PipePipe,
     GridComponent,
     Grid2Component,
     Register2Component,
     Grid3Component,
     UserprofileComponent,
+    SearchFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -69,8 +77,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HttpClientModule,MatIconModule,MatToolbarModule,MatButtonModule,MatDialogModule,MatFormFieldModule,
     MatInputModule,MatDatepickerModule,MatNativeDateModule,MatRadioModule,MatSelectModule,MatTableModule,
     MatPaginatorModule,MatSortModule,MatSnackBarModule,
-    NgToastModule,NgxPaginationModule
-
+    NgToastModule,NgxPaginationModule,NgChartsModule,MatListModule,
+    FlexLayoutModule,FilterPipeModule
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,

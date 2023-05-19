@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, PipeTransform, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UsersDataService} from '../services/users-data.service';
@@ -11,6 +11,32 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import {PageEvent} from '@angular/material/paginator';
+import { NgToastModule, NgToastService } from 'ng-angular-popup';
+import {MatTableDataSource} from '@angular/material/table';
+
+
+export interface PeriodicElement {
+ 
+  firstname: any;
+  lastname: any;
+  email: any;
+  age: any;
+  
+}
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  {
+    
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
+    email: new FormControl(''),
+    age: new FormControl(''),
+    
+  }
+];
+
+
+
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
@@ -20,16 +46,16 @@ export class GridComponent implements OnInit{
 
   users1: any[] = []; 
   currentPage = 1;
-  
   public User:any = [];
   public Role!:string ;
   admin: boolean = true;
-  
   public fullname : string= "";
+
   constructor(private userData:UsersDataService,private auth:AuthService,private http:HttpClient,
     private api:ApiService,private userStore:UserStoreService, 
     private _dialog: MatDialog,
-    private modalService:NgbModal,private route:ActivatedRoute){
+    private modalService:NgbModal,private toast:NgToastService,
+    private route:ActivatedRoute){
   //   userData.users().subscribe((data: any)=>{
   //     this.User=data;
   //     console.warn("data",data);
@@ -82,16 +108,23 @@ data:any;
   }
 
   logout(){
+    if(confirm('Are you sure to logout?')) {
     this.auth.sighOut();
+    this.toast.success({summary:"You have successfully logged out!",duration:5000});
+    }
   }
 
   deleteItem(id: number) {
-    this.api.deleteItem(id).subscribe(() => {
-      this.User = null;
-      this.api.getusers().subscribe(res=>{
-        this.User=res;
+    if(confirm("Are you sure to delete User!!")) {
+      this.api.deleteItem(id).subscribe(() => {
+        this.User = null;
+        this.api.getusers().subscribe(res=>{
+          this.User=res;
+        });
+        this.toast.error({summary:`User ${id} was deleted.`,duration:5000});
       });
-    });
+    }
+    
   }
 
  
@@ -143,9 +176,14 @@ data:any;
 
   items = Array.from({length: 100}).map((_, i) => `Item #${i}`);
   p: number =1;
-  
 
- 
+  displayedColumns: string[] = ['firstname', 'lastname', 'email', 'age'];
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
 
 

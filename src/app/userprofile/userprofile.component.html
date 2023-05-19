@@ -1,14 +1,14 @@
 
-<section class="h-100% gradient-custom-2"  >
+<section class="h-100% gradient-custom"  >
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-lg-9 col-xl-7" style="width: 100.33333333%;">
-          <div class="card">
+          <div class="card shadow-5-strong shadow-lg">
             <div class="rounded-top text-white d-flex flex-row" style="background-color: #040404; height:165px;">
-              <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                <img src="assets/Profile-Male-PNG.png"
+              <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;height: 180px;">
+                <img src="{{data.profile}}"
                   alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2 rounded-circle"
-                  style="width: 150px; z-index: 1">
+                  style="width: 150px;height: 150px; z-index: 1">
                 
               </div>
               <div class="ms-3" style="margin-top: 100px;">
@@ -121,6 +121,17 @@
     
     <div class="modal-body">
      <form [formGroup]="editProfileForm">
+
+      <div >
+        <label for="img"><img [src]="data.profile" class="rounded-circle"
+            height="100" width="100" id="img1" style="cursor: pointer;"></label>
+        <input class="form-control" type="file" style="display: none;
+          visibility:none" (change)="onselectFile($event)" id="img"
+          formControlName="profile"
+          accept="image/xpng,image/jpeg,image/jpg"/>
+      </div>
+      <br>
+
       <div class="form-group row">
        <label for="firstname" class="col-sm-4 col-form-label">First Name</label>
        <div class="col-sm-8">

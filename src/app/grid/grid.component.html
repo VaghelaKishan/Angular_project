@@ -157,21 +157,23 @@
     </div>
   </section> -->
 
-  <div class="">
-    <div  class="row bg-dark text-white flex-nowrap" >
-      <h1 class="text-center">
-      {{fullname}}
-      <button (click)="logout()" class="float-end btn btn-danger m-2">Logout</button><br>
-    </h1>
+  <div class="row">
+    <div  class="row bg-primary text-white flex-nowrap" >
+      <h2 class="mt-2">
+      <img src="../../assets/kd-logo-monogram-emblem-style-with-crown-shape-design-template-free-vector-removebg-preview.png"  width="70px" height="70px">{{fullname}}
+      <button style="padding: 13px;" (click)="logout()" class="float-end btn btn-danger m-2">Logout</button>
+      <br>
+    </h2>
 
     </div>
-    <div  class="row flex-nowrap"  style="height: 91.75vh">
+    <div  class="row flex-nowrap"  style="height: 88.95vh">
       <ng-container *ngIf="Role ==='Admin'">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-primary">
           <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">
                 <a href="grid" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline">Menu</span>
                 </a>
+                
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start " id="menu">
                     <li>
                         <a href="grid"  data-bs-toggle="collapse" class="nav-link px-0 align-middle">
@@ -193,8 +195,9 @@
       </ng-container>
 
 
-      <div class="col">
-        <table class="table align-middle mb-0 bg-white mt-4">
+      <div class="col bg-light">
+      <input class="form-control mr-sm-2 w-25 float-end mt-1 Search-field" type="text" placeholder="Search Here" >
+      <table class="table align-middle bg-white" >
           <thead class="bg-light">
             <tr>
               <th>Name</th>
@@ -206,11 +209,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr  *ngFor="let user of User | paginate: { itemsPerPage: 5, currentPage: currentPage, totalItems: users1.length }">
+            <tr  *ngFor="let user of User  | paginate: { itemsPerPage: 5, currentPage: currentPage, totalItems: users1.length } " >
               <td *ngIf="user.role === 'User'">
                 <div class="d-flex align-items-center">
                   <img
-                    [src]= "user.profile"
+                    src= "{{user.profile}}"
                     alt=""
                     style="width: 45px; height: 45px"
                     class="rounded-circle"
@@ -250,7 +253,7 @@
          
         </table>
         <br>
-        <pagination-controls  (pageChange)="currentPage = $event"></pagination-controls>
+        <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
                 </div>
     </div>
   </div>
@@ -258,10 +261,7 @@
 
 
 
-  <div class="container-fluid">     
-
   
-</div>
 
 
 
